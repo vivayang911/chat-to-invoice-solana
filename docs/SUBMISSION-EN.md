@@ -42,7 +42,9 @@ https://explorer.solana.com/tx/3TEpxsMjbVq5GB9MkPbxUns4om8RRJ9LmLdyi1xC4BKpLjVQX
 
 ## Demo video
 
-Upload the final English MP4 first, then insert its actual accessible video URL. Do not substitute the prior PayPal video.
+https://www.youtube.com/watch?v=1vBvWRrbUAI
+
+Final English demo link supplied by the project owner.
 
 ## YouTube title
 
