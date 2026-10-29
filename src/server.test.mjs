@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,readFile,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import path from 'node:path';import {pathToFileURL} from 'node:url';import {createApp} from './server.mjs';import {createStatementStore} from './statements.mjs';
+test('invalid request URLs and failed static reads do not terminate the server',async()=>{
+ const {request}=await import('node:http');let failRead=true;const port=4195,origin='http://127.0.0.1:'+port;
+ const app=createApp({port,readAsset:async file=>{if(failRead){failRead=false;throw Error('Simulated read failure');}return readFile(file);}});await new Promise(resolve=>app.listen(port,'127.0.0.1',resolve));
+ try{const invalid=await new Promise((resolve,reject)=>{const r=request({hostname:'127.0.0.1',port,path:'http://[',headers:{Host:'127.0.0.1:'+port}},response=>{response.resume();response.on('end',()=>resolve(response.statusCode));});r.on('error',reject);r.end();});assert.equal(invalid,400);
+ const failed=await fetch(origin+'/');assert.equal(failed.status,503);assert.equal((await failed.json()).error,'The page could not be loaded. Please retry.');const recovered=await fetch(origin+'/');assert.equal(recovered.status,200);assert.match(await recovered.text(),/<!doctype html>/i);
+ }finally{await new Promise(resolve=>app.close(resolve));}
+});
+test('a pending analysis does not block payment status, while a second analysis is refused',async()=>{
+ const fixture=JSON.parse(await readFile(new URL('./fixtures/E01.json',import.meta.url),'utf8'));let release,started;const gate=new Promise(resolve=>{started=resolve;});const port=4194,origin='http://127.0.0.1:'+port;let analyses=0,statuses=0;
+ const app=createApp({port,analyzeChat:async()=>{analyses++;started();await new Promise(resolve=>{release=resolve;});return fixture.billingResult;},solana:{config:()=>({network:'devnet'}),status:async()=>{statuses++;return {payment:{status:'PAID'}};}}});await new Promise(resolve=>app.listen(port,'127.0.0.1',resolve));
+ const post=async(action,data)=>{const response=await fetch(origin+'/api/'+action,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(data)});return {status:response.status,data:await response.json()};};
+ try{const first=post('analyze',{chat:'seller: USD 100.\nbuyer: I accept.',consent:true});await gate;const second=await post('analyze',{chat:'seller: USD 100.\nbuyer: I accept.',consent:true});assert.equal(second.status,429);const status=await post('solana/status',{operationId:'11111111-1111-4111-8111-111111111111'});assert.equal(status.status,200);assert.equal(status.data.payment.status,'PAID');assert.equal(analyses,1);assert.equal(statuses,1);release();assert.equal((await first).status,200);}finally{release?.();await new Promise(resolve=>app.close(resolve));}
+});

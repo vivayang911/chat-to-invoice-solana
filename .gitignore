@@ -1,0 +1,10 @@
+work/
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
+releases/
+
+# Local recordings and transaction screenshots are not public source artifacts.
+evidence/

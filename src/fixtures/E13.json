@@ -1,0 +1,170 @@
+{
+  "synthetic": true,
+  "input": [
+    {
+      "id": "M1",
+      "speaker": "seller",
+      "text": "我可以设计一个 Logo，价格为 100 USD，包含两轮修改。"
+    },
+    {
+      "id": "M2",
+      "speaker": "buyer",
+      "text": "我接受 100 USD，设计一个 Logo，包含两轮修改。"
+    },
+    {
+      "id": "M3",
+      "speaker": "buyer",
+      "text": "还能再加一张海报吗？"
+    },
+    {
+      "id": "M4",
+      "speaker": "seller",
+      "text": "加一张需要50USD"
+    },
+    {
+      "id": "M5",
+      "speaker": "buyer",
+      "text": "好的，再加50个文字呢"
+    },
+    {
+      "id": "M6",
+      "speaker": "seller",
+      "text": "需要增加60USD"
+    },
+    {
+      "id": "M7",
+      "speaker": "buyer",
+      "text": "好的，那我要三份海报"
+    },
+    {
+      "id": "M8",
+      "speaker": "seller",
+      "text": "确认：三张不同的海报，每张50USD，共150USD；增加50个文字的费用60USD只收一次；加上Logo的100USD，总共310USD。"
+    },
+    {
+      "id": "M9",
+      "speaker": "buyer",
+      "text": "我接受三张不同海报、文字费只收一次和总价310USD。"
+    }
+  ],
+  "extracted": {
+    "agreementStatus": "CONFIRMED",
+    "amount": "310.00",
+    "currency": "USD",
+    "service": "Logo设计，包含两轮修改 × 1 @ 100.00 USD; 海报设计，每张不同的海报 × 3 @ 50.00 USD; 增加50个文字 × 1 @ 60.00 USD",
+    "pendingIssues": [],
+    "evidence": [
+      {
+        "field": "agreementStatus",
+        "messageId": "M9",
+        "quote": "我接受三张不同海报、文字费只收一次和总价310USD。"
+      },
+      {
+        "field": "amount",
+        "messageId": "M8",
+        "quote": "确认：三张不同的海报，每张50USD，共150USD；增加50个文字的费用60USD只收一次；加上Logo的100USD，总共310USD。"
+      },
+      {
+        "field": "currency",
+        "messageId": "M1",
+        "quote": "我可以设计一个 Logo，价格为 100 USD，包含两轮修改。"
+      },
+      {
+        "field": "service",
+        "messageId": "M9",
+        "quote": "我接受三张不同海报、文字费只收一次和总价310USD。"
+      }
+    ],
+    "modelReportedAmount": "310.00",
+    "modelAgreementStatus": "CONFIRMED",
+    "billingItems": [
+      {
+        "id": "B1",
+        "description": "Logo设计，包含两轮修改",
+        "status": "ACCEPTED",
+        "quantity": 1,
+        "unitAmount": "100.00",
+        "priceBasis": "ONE_OFF",
+        "priceEvidence": [
+          "M1",
+          "M8"
+        ],
+        "quantityEvidence": [
+          "M1",
+          "M8"
+        ],
+        "acceptanceEvidence": [
+          "M2",
+          "M9"
+        ]
+      },
+      {
+        "id": "B2",
+        "description": "海报设计，每张不同的海报",
+        "status": "ACCEPTED",
+        "quantity": 3,
+        "unitAmount": "50.00",
+        "priceBasis": "PER_UNIT",
+        "priceEvidence": [
+          "M4",
+          "M8"
+        ],
+        "quantityEvidence": [
+          "M7",
+          "M8"
+        ],
+        "acceptanceEvidence": [
+          "M9"
+        ]
+      },
+      {
+        "id": "B3",
+        "description": "增加50个文字",
+        "status": "ACCEPTED",
+        "quantity": 1,
+        "unitAmount": "60.00",
+        "priceBasis": "ONE_OFF",
+        "priceEvidence": [
+          "M6",
+          "M8"
+        ],
+        "quantityEvidence": [
+          "M8"
+        ],
+        "acceptanceEvidence": [
+          "M9"
+        ]
+      }
+    ],
+    "calculation": {
+      "version": 1,
+      "method": "INTEGER_CENTS",
+      "lines": [
+        {
+          "id": "B1",
+          "amount": "100.00"
+        },
+        {
+          "id": "B2",
+          "amount": "150.00"
+        },
+        {
+          "id": "B3",
+          "amount": "60.00"
+        }
+      ],
+      "acceptedSubtotal": "310.00",
+      "amount": "310.00",
+      "service": "Logo设计，包含两轮修改 × 1 @ 100.00 USD; 海报设计，每张不同的海报 × 3 @ 50.00 USD; 增加50个文字 × 1 @ 60.00 USD",
+      "blockers": [],
+      "canInvoice": true
+    },
+    "negotiationEvents": [],
+    "analysisStrategy": "direct",
+    "modelReportedService": "Logo设计（含两轮修改）、三张不同海报设计、增加50个文字（费用只收一次）",
+    "requestDiagnostics": {
+      "transportRetries": []
+    },
+    "formatCorrections": []
+  }
+}

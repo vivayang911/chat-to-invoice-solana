@@ -1,0 +1,27 @@
+{
+  "name": "chat-to-invoice-solana",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "powershell -NoProfile -File scripts/start-groq.ps1",
+    "test": "node --test src/*.test.mjs scripts/parse-model-json.test.mjs",
+    "start:groq": "powershell -NoProfile -File scripts/start-groq.ps1",
+    "build:wallet": "esbuild src/wallet-entry.js --bundle --format=esm --platform=browser --outfile=src/wallet.bundle.js",
+    "start:direct": "node --env-file-if-exists=work/groq-model.env --env-file-if-exists=work/solana.env scripts/start-solana.mjs",
+    "check:setup": "node --env-file-if-exists=work/groq-model.env --env-file-if-exists=work/solana.env scripts/check-solana-setup.mjs",
+    "configure:solana": "powershell -NoProfile -File scripts/configure-solana.ps1"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.99.0",
+    "bs58": "^6.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "overrides": {
+    "jayson": "5.0.0"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "billingItems": [
+    {
+      "id": "B1",
+      "description": "Logo设计（包含两轮修改）",
+      "status": "ACCEPTED",
+      "quantity": 1,
+      "unitAmount": "100.00",
+      "priceBasis": "ONE_OFF",
+      "priceEvidence": [
+        "M1",
+        "M2"
+      ],
+      "quantityEvidence": [
+        "M1",
+        "M2"
+      ],
+      "acceptanceEvidence": [
+        "M2"
+      ]
+    },
+    {
+      "id": "B2",
+      "description": "额外海报设计",
+      "status": "PENDING",
+      "quantity": 1,
+      "unitAmount": "50.00",
+      "priceBasis": "ONE_OFF",
+      "priceEvidence": [
+        "M4"
+      ],
+      "quantityEvidence": [
+        "M3",
+        "M4"
+      ],
+      "acceptanceEvidence": []
+    },
+    {
+      "id": "B3",
+      "description": "海报文案/文字部分（50字符）",
+      "status": "PENDING",
+      "quantity": 1,
+      "unitAmount": "60.00",
+      "priceBasis": "UNKNOWN",
+      "priceEvidence": [
+        "M6"
+      ],
+      "quantityEvidence": [
+        "M5",
+        "M6"
+      ],
+      "acceptanceEvidence": []
+    }
+  ],
+  "agreementStatus": "NEEDS_CONFIRMATION",
+  "amount": null,
+  "currency": "USD",
+  "service": "Logo设计（包含两轮修改）",
+  "pendingIssues": [
+    "海报及文字部分的具体数量、修改费用及买家最终接受状态未定",
+    "“三份海报”是否替换原有“一张海报+50字符”的报价，或是增加新的未报价需求，尚待澄清"
+  ],
+  "evidence": [
+    {
+      "field": "agreementStatus",
+      "messageId": "M7"
+    },
+    {
+      "field": "currency",
+      "messageId": "M1"
+    },
+    {
+      "field": "service",
+      "messageId": "M2"
+    },
+    {
+      "field": "pendingIssues",
+      "messageId": "M7"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "messages": [
+    {
+      "id": "M1",
+      "speaker": "seller",
+      "text": "One logo costs USD 100."
+    },
+    {
+      "id": "M2",
+      "speaker": "buyer",
+      "text": "I accept the USD 100 quote."
+    },
+    {
+      "id": "M3",
+      "speaker": "seller",
+      "text": "Correction: I cannot honor USD 100. My revised quote is USD 150. Please confirm."
+    }
+  ],
+  "finishReason": "stop",
+  "extracted": {
+    "agreementStatus": "NEEDS_CONFIRMATION",
+    "amount": null,
+    "currency": "USD",
+    "service": "One logo",
+    "pendingIssues": [
+      "The original USD 100 quote was withdrawn and replaced with a USD 150 quote, which the buyer has not yet accepted."
+    ],
+    "evidence": [
+      {
+        "field": "service",
+        "messageId": "M1",
+        "quote": "One logo costs USD 100."
+      },
+      {
+        "field": "currency",
+        "messageId": "M1",
+        "quote": "One logo costs USD 100."
+      },
+      {
+        "field": "agreementStatus",
+        "messageId": "M3",
+        "quote": "Correction: I cannot honor USD 100. My revised quote is USD 150. Please confirm."
+      },
+      {
+        "field": "pendingIssues",
+        "messageId": "M3",
+        "quote": "Correction: I cannot honor USD 100. My revised quote is USD 150. Please confirm."
+      }
+    ]
+  },
+  "billingFixturePurpose": "Hand-authored expected ledger for UI tests; not a new model response.",
+  "billingResult": {
+    "agreementStatus": "NEEDS_CONFIRMATION",
+    "amount": null,
+    "currency": "USD",
+    "service": null,
+    "pendingIssues": [
+      "The original USD 100 quote was withdrawn and replaced with a USD 150 quote, which the buyer has not yet accepted."
+    ],
+    "evidence": [
+      {
+        "field": "service",
+        "messageId": "M1",
+        "quote": "One logo costs USD 100."
+      },
+      {
+        "field": "currency",
+        "messageId": "M1",
+        "quote": "One logo costs USD 100."
+      },
+      {
+        "field": "agreementStatus",
+        "messageId": "M3",
+        "quote": "Correction: I cannot honor USD 100. My revised quote is USD 150. Please confirm."
+      },
+      {
+        "field": "pendingIssues",
+        "messageId": "M3",
+        "quote": "Correction: I cannot honor USD 100. My revised quote is USD 150. Please confirm."
+      }
+    ],
+    "modelReportedAmount": null,
+    "modelAgreementStatus": "NEEDS_CONFIRMATION",
+    "billingItems": [
+      {
+        "id": "B1",
+        "description": "One logo revised quote",
+        "status": "PENDING",
+        "quantity": 1,
+        "unitAmount": "150.00",
+        "priceBasis": "ONE_OFF",
+        "priceEvidence": [
+          "M3"
+        ],
+        "quantityEvidence": [
+          "M1"
+        ],
+        "acceptanceEvidence": []
+      }
+    ],
+    "calculation": {
+      "version": 1,
+      "method": "INTEGER_CENTS",
+      "lines": [],
+      "acceptedSubtotal": null,
+      "amount": null,
+      "service": null,
+      "blockers": [
+        "UNCONFIRMED_REQUEST",
+        "PENDING_ITEMS",
+        "NO_ACCEPTED_ITEMS"
+      ],
+      "canInvoice": false
+    }
+  }
+}

@@ -1,0 +1,133 @@
+[
+  {
+    "id": "E06",
+    "messages": [
+      {
+        "id": "M1",
+        "speaker": "seller",
+        "text": "One logo costs USD 100. A logo and poster package costs USD 150."
+      },
+      {
+        "id": "M2",
+        "speaker": "buyer",
+        "text": "Sounds interesting. Let me think."
+      }
+    ],
+    "result": {
+      "agreementStatus": "NEEDS_CONFIRMATION",
+      "amount": null,
+      "currency": null,
+      "service": null,
+      "pendingIssues": [
+        "The seller has proposed two different price points but the buyer has not yet accepted any specific package, so no confirmed service or amount exists."
+      ],
+      "evidence": [
+        {
+          "field": "agreementStatus",
+          "messageId": "M1",
+          "quote": "One logo costs USD 100. A logo and poster package costs USD 150."
+        },
+        {
+          "field": "agreementStatus",
+          "messageId": "M2",
+          "quote": "Sounds interesting. Let me think."
+        }
+      ]
+    },
+    "finishReason": "stop"
+  },
+  {
+    "id": "E07",
+    "messages": [
+      {
+        "id": "M1",
+        "speaker": "seller",
+        "text": "One logo costs 100, including two revision rounds."
+      },
+      {
+        "id": "M2",
+        "speaker": "buyer",
+        "text": "I accept 100 for one logo with two revision rounds."
+      }
+    ],
+    "result": {
+      "agreementStatus": "CONFIRMED",
+      "amount": "100.00",
+      "currency": null,
+      "service": "One logo with two revision rounds",
+      "pendingIssues": [
+        "The currency for the agreed amount of 100 was not specified, so the billing currency remains unresolved."
+      ],
+      "evidence": [
+        {
+          "field": "amount",
+          "messageId": "M1",
+          "quote": "One logo costs 100, including two revision rounds."
+        },
+        {
+          "field": "service",
+          "messageId": "M1",
+          "quote": "One logo costs 100, including two revision rounds."
+        },
+        {
+          "field": "agreementStatus",
+          "messageId": "M2",
+          "quote": "I accept 100 for one logo with two revision rounds."
+        }
+      ]
+    },
+    "finishReason": "stop"
+  },
+  {
+    "id": "E09",
+    "messages": [
+      {
+        "id": "M1",
+        "speaker": "seller",
+        "text": "I can design one logo for USD 100, including two revision rounds."
+      },
+      {
+        "id": "M2",
+        "speaker": "buyer",
+        "text": "I accept USD 100 for one logo with two revision rounds."
+      },
+      {
+        "id": "M3",
+        "speaker": "buyer",
+        "text": "Please cancel the entire logo job."
+      },
+      {
+        "id": "M4",
+        "speaker": "seller",
+        "text": "Confirmed. The whole job is canceled and no payment is due."
+      }
+    ],
+    "result": {
+      "agreementStatus": "NEEDS_CONFIRMATION",
+      "amount": null,
+      "currency": "USD",
+      "service": null,
+      "pendingIssues": [
+        "The entire logo design job was explicitly canceled by the buyer and confirmed by the seller, so no active billable job remains."
+      ],
+      "evidence": [
+        {
+          "field": "agreementStatus",
+          "messageId": "M3",
+          "quote": "Please cancel the entire logo job."
+        },
+        {
+          "field": "agreementStatus",
+          "messageId": "M4",
+          "quote": "Confirmed. The whole job is canceled and no payment is due."
+        },
+        {
+          "field": "currency",
+          "messageId": "M1",
+          "quote": "I can design one logo for USD 100, including two revision rounds."
+        }
+      ]
+    },
+    "finishReason": "stop"
+  }
+]
