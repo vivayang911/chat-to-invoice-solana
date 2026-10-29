@@ -22,7 +22,7 @@ An actual four-row English cup invoice totaling 190 TEST USD has completed devne
 
 ## Constraints
 
-Localhost only; do not expose this server publicly. Acknowledgement links do not verify identity. Item names and amounts in a Memo become public. The 500 UTF-8 byte Memo and 1232 byte transaction limits are enforced without dropping items. Unknown submissions must be queried, not automatically repaid. No escrow, refunds or delivery verification. Public repository and event submission remain separate delivery work.
+Localhost only; do not expose this server publicly. Acknowledgement links do not verify identity. Item names and amounts in a Memo become public. The 500 UTF-8 byte Memo and 1232 byte transaction limits are enforced without dropping items. Unknown submissions must be queried, not automatically repaid. No escrow, refunds or delivery verification. The independent public source repository is https://github.com/vivayang911/chat-to-invoice-solana . Video upload and event submission remain pending.
 
 ## License and provenance
 
