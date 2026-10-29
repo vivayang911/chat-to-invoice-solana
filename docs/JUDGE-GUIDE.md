@@ -15,4 +15,8 @@ Current automated acceptance: the current passing test count printed by `npm tes
 
 The server binds to localhost. Confirmation links are for the same computer and do not verify identity. Public Memo is limited to 500 UTF-8 bytes; oversized invoices are rejected without omitting rows. No automatic repayment of uncertain transactions is offered.
 
-The public Solana repository, completed English video and Encode submission remain separate delivery tasks. This guide does not claim they are complete.
+Public source: https://github.com/vivayang911/chat-to-invoice-solana
+
+English demo: https://www.youtube.com/watch?v=1vBvWRrbUAI
+
+Encode submission remains pending confirmation.
