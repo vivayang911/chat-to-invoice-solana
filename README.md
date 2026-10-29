@@ -2,6 +2,12 @@
 
 A consumer prototype for negotiated custom orders: chat to itemized statement, separate acknowledgements, and verified Solana devnet payment with a readable invoice Memo.
 
+## Demo video
+
+https://www.youtube.com/watch?v=1vBvWRrbUAI
+
+English edited walkthrough, approximately 2 minutes 53 seconds. Demonstration uses valueless devnet TEST USD; no real funds.
+
 ## Start
 
 Node.js 22+ (24 recommended). Run `npm ci`, create `work/`, and copy `groq-model.env.example` and `solana.env.example` there without the `.example` suffix. Supply your own model key and public devnet addresses. Never enter wallet private keys or seed phrases.
@@ -22,7 +28,7 @@ An actual four-row English cup invoice totaling 190 TEST USD has completed devne
 
 ## Constraints
 
-Localhost only; do not expose this server publicly. Acknowledgement links do not verify identity. Item names and amounts in a Memo become public. The 500 UTF-8 byte Memo and 1232 byte transaction limits are enforced without dropping items. Unknown submissions must be queried, not automatically repaid. No escrow, refunds or delivery verification. The independent public source repository is https://github.com/vivayang911/chat-to-invoice-solana . Video upload and event submission remain pending.
+Localhost only; do not expose this server publicly. Acknowledgement links do not verify identity. Item names and amounts in a Memo become public. The 500 UTF-8 byte Memo and 1232 byte transaction limits are enforced without dropping items. Unknown submissions must be queried, not automatically repaid. No escrow, refunds or delivery verification. The independent public source repository is https://github.com/vivayang911/chat-to-invoice-solana . The demo video link is provided above. Encode submission remains pending confirmation.
 
 ## License and provenance
 
