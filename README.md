@@ -4,9 +4,9 @@ A consumer prototype for negotiated custom orders: chat to itemized statement, s
 
 ## Demo video
 
-https://www.youtube.com/watch?v=1vBvWRrbUAI
+https://www.youtube.com/watch?v=tuEUQPYkb4M
 
-English edited walkthrough, approximately 2 minutes 53 seconds. Demonstration uses valueless devnet TEST USD; no real funds.
+English 1920×1080 edited walkthrough, approximately 2 minutes 53 seconds, with readable transcriptions and an original Explorer receipt screenshot. Demonstration uses valueless devnet TEST USD; no real funds.
 
 ## Start
 
@@ -24,7 +24,7 @@ USD is the agreed product quotation. The demo maps each quoted USD to one valuel
 
 `npm test` runs source validation, arithmetic, acknowledgement, devnet transaction and recovery tests. `npm run build:wallet` rebuilds the locally served bundle. `python scripts/package-solana.py` builds an allowlisted source archive without local keys or runtime state.
 
-An actual four-row English cup invoice totaling 190 TEST USD has completed devnet payment with a readable Memo. Tests also inject RPC results for failure, timeout, restart and duplicate submission paths. See docs/JUDGE-GUIDE.md and docs/DEMO-EN.md. The English MP4 in local releases is an edited screenshot walkthrough, not continuous wallet footage.
+An actual four-row English cup invoice totaling 190 TEST USD has completed devnet payment with a readable Memo. Tests also inject RPC results for failure, timeout, restart and duplicate submission paths. See docs/JUDGE-GUIDE.md and docs/DEMO-EN.md. The English MP4 uses labeled readable transcriptions of the demo conversation and saved statement records, alongside an original Explorer receipt screenshot; it is not continuous wallet footage.
 
 ## Constraints
 
