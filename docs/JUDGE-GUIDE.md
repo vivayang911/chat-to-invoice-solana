@@ -17,6 +17,6 @@ The server binds to localhost. Confirmation links are for the same computer and 
 
 Public source: https://github.com/vivayang911/chat-to-invoice-solana
 
-English demo: https://www.youtube.com/watch?v=1vBvWRrbUAI
+English demo: https://www.youtube.com/watch?v=tuEUQPYkb4M
 
 Encode submission remains pending confirmation.
