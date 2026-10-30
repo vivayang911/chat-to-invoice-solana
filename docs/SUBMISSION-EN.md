@@ -42,7 +42,7 @@ https://explorer.solana.com/tx/3TEpxsMjbVq5GB9MkPbxUns4om8RRJ9LmLdyi1xC4BKpLjVQX
 
 ## Demo video
 
-https://www.youtube.com/watch?v=1vBvWRrbUAI
+https://www.youtube.com/watch?v=tuEUQPYkb4M
 
 Final English demo link supplied by the project owner.
 
@@ -54,7 +54,7 @@ Chat to Invoice — Solana | Negotiated Orders to On-Chain Receipts
 
 Chat to Invoice turns accepted chat terms into source-linked itemized statements and verifies their payment on Solana devnet.
 
-This edited walkthrough uses real application screenshots and English synthesized narration. It shows a previously completed 190 TEST USD cup-order payment. No new payment or wallet approval is staged. TEST USD is a custom valueless devnet token, not USD or USDC. Transaction fees use test SOL.
+This 1920×1080 edited walkthrough uses labeled readable transcriptions of the synthetic demo conversation and saved statement records, an original Solana Explorer receipt screenshot, and English synthesized narration. It shows a previously completed 190 TEST USD cup-order payment. No new payment or wallet approval is staged. TEST USD is a custom valueless devnet token, not USD or USDC. Transaction fees use test SOL.
 
 Source and setup: https://github.com/vivayang911/chat-to-invoice-solana
 
