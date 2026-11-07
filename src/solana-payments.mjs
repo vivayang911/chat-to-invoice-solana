@@ -35,12 +35,12 @@ export function verifyTokenPayment(tx,record){
  if(BigInt(post.uiTokenAmount.amount)-BigInt(pre?.uiTokenAmount?.amount||'0')!==BigInt(record.units))fail('recipient balance delta does not match.');
  return {slot:tx.slot};
 }
-export function createSolanaStore({statements,directory=new URL('../work/solana/',import.meta.url),connection=new Connection(RPC,{commitment:'finalized',disableRetryOnRateLimit:true,fetch:(url,options)=>fetch(url,{...options,redirect:'error',signal:AbortSignal.timeout(20000)})}),merchant=process.env.SOLANA_MERCHANT,mint=process.env.SOLANA_TEST_MINT}={}){
+export function createSolanaStore({statements,storage,directory=new URL('../work/solana/',import.meta.url),connection=new Connection(RPC,{commitment:'finalized',disableRetryOnRateLimit:true,fetch:(url,options)=>fetch(url,{...options,redirect:'error',signal:AbortSignal.timeout(20000)})}),merchant=process.env.SOLANA_MERCHANT,mint=process.env.SOLANA_TEST_MINT}={}){
  let running=false;
  const file=new URL('payments.json',directory);
  const config=()=>({network:'devnet',asset:'TEST_USD',merchant:walletAddress(merchant),mint:new PublicKey(mint).toBase58(),rpc:RPC});
- async function read(){try{return JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return {};throw e;}}
- async function save(records){await mkdir(directory,{recursive:true});await writeFile(new URL('payments.tmp',directory),JSON.stringify(records,null,2));await rename(new URL('payments.tmp',directory),file);}
+ async function read(){if(storage)return (await storage.get("payments"))??{};try{return JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return {};throw e;}}
+ async function save(records){if(storage)return storage.set("payments",records);await mkdir(directory,{recursive:true});await writeFile(new URL('payments.tmp',directory),JSON.stringify(records,null,2));await rename(new URL('payments.tmp',directory),file);}
  async function lock(fn){if(running)fail('another payment query is running. Retry shortly.');running=true;try{return await fn();}finally{running=false;}}
  async function statement(data,{requireActive=true}={}){const s=await statements.status(data.id,data.token);if(requireActive&&(s.expired||s.status!=='CONFIRMED'||!s.buyerConfirmedAt||!s.sellerConfirmedAt||s.draft.paymentNetwork!=='solana-devnet'))fail('both parties must confirm an active Solana statement.');return s;}
  const view=r=>({network:'devnet',asset:'TEST_USD',amount:r.amount,merchant:r.merchant,mint:r.mint,payer:r.payer,status:r.status,signature:r.signature||null,explorer:r.signature?'https://explorer.solana.com/tx/'+r.signature+'?cluster=devnet':null,fingerprint:r.fingerprint,checkedAt:r.checkedAt||null,memo:r.memo,memoFormat:[1,2].includes(r.memoFormat)?'SHORT_INVOICE_V'+r.memoFormat:'LEGACY_REFERENCE',shortInvoice:r.memoFormat===1?JSON.parse(r.memo):null});

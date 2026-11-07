@@ -3,11 +3,11 @@ import {randomUUID,randomBytes,createHash,timingSafeEqual} from 'node:crypto';
 import {validateDraft} from './draft-validation.mjs';
 import {statementExpired} from './statement-state.mjs';
 const hash=x=>createHash('sha256').update(x).digest('hex');
-export function createStatementStore({directory=new URL('../work/fee-statements/',import.meta.url),now=()=>Date.now(),validate=validateDraft,beforeMutation=async()=>{}}={}){
+export function createStatementStore({directory=new URL('../work/fee-statements/',import.meta.url),storage,now=()=>Date.now(),validate=validateDraft,beforeMutation=async()=>{}}={}){
  const locks=new Set();
  const file=id=>{if(typeof id!=='string'||!/^[a-f0-9-]{36}$/.test(id))throw Error('Statement: invalid ID.');return new URL(id+'.json',directory);};
- async function load(id){try{return JSON.parse(await readFile(file(id),'utf8'));}catch(e){if(e.code==='ENOENT')throw Error('Statement: not found.');throw e;}}
- async function save(r){await mkdir(directory,{recursive:true});const tmp=new URL(r.id+'.tmp',directory);await writeFile(tmp,JSON.stringify(r,null,2));await rename(tmp,file(r.id));}
+ async function load(id){if(storage){file(id);const record=await storage.get(id);if(!record)throw Error("Statement: not found.");return record;}try{return JSON.parse(await readFile(file(id),'utf8'));}catch(e){if(e.code==='ENOENT')throw Error('Statement: not found.');throw e;}}
+ async function save(r){if(storage)return storage.set(r.id,r);await mkdir(directory,{recursive:true});const tmp=new URL(r.id+'.tmp',directory);await writeFile(tmp,JSON.stringify(r,null,2));await rename(tmp,file(r.id));}
  async function exclusive(id,fn){if(locks.has(id)){const error=Error('Statement: another update is running. Retry.');error.code='OPERATION_BUSY';throw error;}locks.add(id);try{return await fn();}finally{locks.delete(id);}}
  function authorize(r,token,role){if(typeof token!=='string'||!/^[a-f0-9]{64}$/.test(token))throw Error('Statement: invalid access link.');const digest=hash(token);const roles=role?[role]:['seller','buyer'];const found=roles.find(x=>['seller','buyer'].includes(x)&&timingSafeEqual(Buffer.from(digest,'hex'),Buffer.from(r.tokens[x],'hex')));if(!found)throw Error('Statement: invalid access link.');return found;}
  function view(r,role){return {id:r.id,version:r.version,role,draft:r.draft,items:r.items,fingerprint:r.fingerprint,status:r.status,createdAt:r.createdAt,expiresAt:r.expiresAt,sellerConfirmedAt:r.sellerConfirmedAt,buyerConfirmedAt:r.buyerConfirmedAt,feedback:r.feedback||null,expired:statementExpired(r,now())};}

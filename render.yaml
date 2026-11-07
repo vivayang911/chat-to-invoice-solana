@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: chat-to-invoice-solana
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm ci
+    startCommand: node scripts/start-render.mjs
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: MODEL_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SOLANA_MERCHANT
+        sync: false
+      - key: SOLANA_TEST_MINT
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cti-devnet-db
+          property: connectionString
+databases:
+  - name: cti-devnet-db
+    plan: free
+    region: oregon
