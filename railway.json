@@ -1,0 +1,1 @@
+{"deploy":{"startCommand":"node scripts/start-render.mjs","healthcheckPath":"/healthz","healthcheckTimeout":120,"numReplicas":1}}

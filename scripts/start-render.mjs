@@ -2,12 +2,13 @@ import pg from 'pg';
 import {createApp} from '../src/server.mjs';
 
 const {DATABASE_URL, RENDER_EXTERNAL_URL, PORT} = process.env;
-if (!DATABASE_URL || !RENDER_EXTERNAL_URL || !PORT) {
-  throw new Error('Render requires DATABASE_URL, RENDER_EXTERNAL_URL and PORT.');
+const origin = process.env.RAILWAY_PUBLIC_DOMAIN ? "https://" + process.env.RAILWAY_PUBLIC_DOMAIN : RENDER_EXTERNAL_URL;
+if (!DATABASE_URL || !origin || !PORT) {
+  throw new Error('Hosted demo requires DATABASE_URL, a public domain and PORT.');
 }
-const url = new URL(RENDER_EXTERNAL_URL);
+const url = new URL(origin);
 if (url.protocol !== 'https:' || url.username || url.password || url.href !== url.origin + '/') {
-  throw new Error('Render external URL must be a bare HTTPS origin.');
+  throw new Error('Public URL must be a bare HTTPS origin.');
 }
 
 const db = new pg.Client({connectionString: DATABASE_URL, connectionTimeoutMillis: 10000});
