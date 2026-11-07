@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "powershell -NoProfile -File scripts/start-groq.ps1",
+    "start": "node scripts/start-render.mjs",
     "test": "node --test src/*.test.mjs scripts/parse-model-json.test.mjs",
     "start:groq": "powershell -NoProfile -File scripts/start-groq.ps1",
     "build:wallet": "esbuild src/wallet-entry.js --bundle --format=esm --platform=browser --outfile=src/wallet.bundle.js",
